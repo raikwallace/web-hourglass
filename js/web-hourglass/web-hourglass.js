@@ -20,16 +20,18 @@ window.onload = (event) => {
             }
             limitedDomains.limitedDomains.forEach(url => {
                 if (window.location.hostname.includes(url)) {
-                    chrome.storage.sync.get("usedTimeSec", (data) => {
-                        if (data.lastDay != new Date().getDate()) {
-                            chrome.storage.sync.set({ usedTimeSec: 0, lastDay: new Date().getDate() })
-                        }
-                        chrome.storage.sync.set({ usedTimeSec: data.usedTimeSec + 5, lastDay: new Date().getDate() })
-                        chrome.storage.sync.get("timeSec", (timeSec) => {
-                            if (timeSec.timeSec != 0 && data.usedTimeSec + 5 > timeSec.timeSec) {
-                                limitTime()
+                    chrome.storage.sync.get("usedTimeSec", (usedTimeSec) => {
+                        chrome.storage.sync.get("lastDay", (lastDay) => {
+                            if (lastDay.lastDay != new Date().getDate()) {
+                                chrome.storage.sync.set({ usedTimeSec: 0, lastDay: new Date().getDate() })
                             }
-                        });
+                            chrome.storage.sync.set({ usedTimeSec: usedTimeSec.usedTimeSec + 5, lastDay: new Date().getDate() })
+                            chrome.storage.sync.get("timeSec", (timeSec) => {
+                                if (timeSec.timeSec != 0 && usedTimeSec.usedTimeSec + 5 > timeSec.timeSec) {
+                                    limitTime()
+                                }
+                            });
+                        })
                     })
                 }
             }
@@ -41,12 +43,18 @@ window.onload = (event) => {
 
 chrome.storage.sync.get("timeSec", (timeSec) => {
     chrome.storage.sync.get("usedTimeSec", (usedTimeSec) => {
-        if (timeSec.timeSec == 0) {
-            return;
-        }
-        if (usedTimeSec.usedTimeSec > timeSec.timeSec) {
-            limitTime()
-        }
+        chrome.storage.sync.get("lastDay", (lastDay) => {
+            if (lastDay.lastDay != new Date().getDate()) {
+                chrome.storage.sync.set({ usedTimeSec: 0, lastDay: new Date().getDate() })
+                return;
+            }
+            if (timeSec.timeSec == 0) {
+                return;
+            }
+            if (usedTimeSec.usedTimeSec > timeSec.timeSec) {
+                limitTime()
+            }
+        })
     })
 })
 

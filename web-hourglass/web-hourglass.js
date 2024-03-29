@@ -116,4 +116,11 @@ chrome.storage.sync.get("timeSec", (data) => {
     return;
   }
   document.querySelector("input#timeLimiter").placeholder = (data.timeSec / 60) || 0;
+  if (!data.timeSec || data.timeSec == 0) {
+    document.querySelector("div#timeLeft").remove();
+    return;
+  }
+  chrome.storage.sync.get("usedTimeSec", (usedTimeSec) => {
+    document.querySelector("div#timeLeft").textContent = "Time left: " + Math.round((data.timeSec / 60) - ((usedTimeSec.usedTimeSec || 0)/ 60)) + " minutes";
+  });
 });

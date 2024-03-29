@@ -1,4 +1,4 @@
-<img src="./images/hourglass.png" alt="icon" width="200" style="display: block;
+<img src="./images/hourglass.png" alt="icon" style="display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;"/>
