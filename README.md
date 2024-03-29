@@ -1,10 +1,13 @@
-![icon](./images/hourglass.png)
+<img src="./images/hourglass.png" alt="icon" width="200" style="display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;"/>
 
-# Web Hourglass
+# ⏳ Web Hourglass
 
 Chrome extension to limit the time you spend in a list of domains.
 
-## How to use
+## ⏳ How to use
 
 During the first usage the application will ask you for a PIN, this PIN will let you change the time and delete the domains you have restringed.
 
