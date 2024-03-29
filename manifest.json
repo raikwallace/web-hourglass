@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Web Hourglass",
     "description": "Chrome extension to limit the time you spend in a list of domains.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "icons": {
         "16": "images/hourglass.png",
         "32": "images/hourglass.png",
