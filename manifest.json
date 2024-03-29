@@ -4,7 +4,10 @@
     "description": "Chrome extension to limit the time you spend in a list of domains.",
     "version": "1.0.0",
     "icons": {
-        "32": "images/hourglass.png"
+        "16": "images/hourglass.png",
+        "32": "images/hourglass.png",
+        "48": "images/hourglass.png",
+        "128": "images/hourglass.png"
     },
     "permissions": [
         "tabs",
