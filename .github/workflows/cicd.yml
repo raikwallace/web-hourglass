@@ -1,0 +1,32 @@
+name: CICD
+run-name: ${{ github.actor }} is creating a new version 🚀
+on:
+    push:
+        branches:
+            - main
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+        - name: Use Node.js 20.x
+          uses: actions/setup-node@v4
+          with:
+            node-version: 20.x
+        - name: Change version
+          env:
+            COMMIT_MAJOR: ${{ contains(github.event.head_commit.message, '[major]') }}
+          run: |
+            if ${COMMIT_VAR} == true; then
+                node ./js/utils/version-manager.js -M
+            else
+                node ./js/utils/version-manager.js
+            fi
+            git config user.name github-actions
+            git config user.email github-actions@github.com
+            git add .
+            git commit -m "released new version 🚀"
+            git push
+
+      
