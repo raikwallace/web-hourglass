@@ -121,6 +121,28 @@ chrome.storage.sync.get("timeSec", (data) => {
     return;
   }
   chrome.storage.sync.get("usedTimeSec", (usedTimeSec) => {
-    document.querySelector("div#timeLeft").textContent = "Time left: " + Math.round((data.timeSec / 60) - ((usedTimeSec.usedTimeSec || 0)/ 60)) + " minutes";
+    const minutesLeft = Math.round((data.timeSec / 60) - ((usedTimeSec.usedTimeSec || 0)/ 60));
+    const alert = document.querySelector("div#timeLeft")
+    alert.textContent = "Time left: " + minutesLeft + " minutes";
+    if (minutesLeft <= 0) {
+      alert.className = alert.className + " alert-danger";
+      buttonAddMoreTime = document.createElement("button");
+      buttonAddMoreTime.id = "addMoreTime";
+      buttonAddMoreTime.className = "btn btn-primary";
+      buttonAddMoreTime.textContent = "Add 5 more minutes, please!";
+      buttonAddMoreTime.addEventListener("click", async () => {
+        chrome.storage.sync.get("usedTimeSec", (buttonUsedTimeSec) => {
+          const usedTimeSec = buttonUsedTimeSec.usedTimeSec - 300;
+          chrome.storage.sync.set({ usedTimeSec });
+          window.alert("Added 5 minutes more! Use them wisely!");
+          window.location.reload();
+        });
+      });
+      alert.append(buttonAddMoreTime);
+    } else if (minutesLeft < 10) {
+      alert.className = alert.className + " alert-warning";
+    } else {
+      alert.className = alert.className + " alert-primary";
+    }
   });
 });

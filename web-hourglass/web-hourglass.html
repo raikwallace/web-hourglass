@@ -25,7 +25,8 @@
             <span class="input-group-text">minutes</span>
         </div>
         <div class="input-group form-floating mb-3">
-            <input id="pinTime" autocomplete="off" type="text" min="0" max="9999" step="1" placeholder="YYYY" pattern="[0-9]{4}" maxlength="4" class="form-control"/>
+            <input id="pinTime" autocomplete="off" type="password" min="0" max="9999" step="1" placeholder="YYYY" pattern="[0-9]{4}"
+                maxlength="4" class="form-control" />
             <button id="changeTime" class="btn btn-primary">Change limit time!</button>
             <label for="time">PIN</label>
         </div>
@@ -34,7 +35,8 @@
             <form>
                 <div id="limitedDomains" class="list-group mb-3"></div>
                 <div id="removeLimitedDomains" class="input-group form-floating mb-3">
-                    <input id="pinDomains" autocomplete="off" type="text" min="0" max="9999" step="1" placeholder="YYYY" pattern="[0-9]{4}" maxlength="4" class="form-control"/>
+                    <input id="pinDomains" autocomplete="off" type="password" min="0" max="9999" step="1" placeholder="YYYY"
+                        pattern="[0-9]{4}" maxlength="4" class="form-control" />
                     <button id="removeLimitedDomains" class="btn btn-danger">Remove marked!</button>
                     <label for="time">PIN</label>
                 </div>
@@ -44,11 +46,13 @@
     <div id="pin" class="container">
         <h1>Add a pin for the limit time extension</h1>
         <div class="input-group form-floating mb-3">
-            <input id="pin" autocomplete="off" type="text" min="0" max="9999" step="1" placeholder="YYYY" pattern="[0-9]{4}" maxlength="4" class="form-control" required/>
+            <input id="pin" autocomplete="off" type="password" min="0" max="9999" step="1" placeholder="YYYY" pattern="[0-9]{4}"
+                maxlength="4" class="form-control" required />
             <label for="pin">PIN</label>
         </div>
         <div class="input-group form-floating mb-3">
-            <input id="repeatedPin" autocomplete="off" type="text" min="0" max="9999" step="1" placeholder="YYYY" pattern="[0-9]{4}" maxlength="4" class="form-control" required/>
+            <input id="repeatedPin" autocomplete="off" type="password" min="0" max="9999" step="1" placeholder="YYYY"
+                pattern="[0-9]{4}" maxlength="4" class="form-control" required />
             <label for="repeatedPin">Repeat PIN</label>
         </div>
         <div id="setPinGroup" class="input-group mb-3">
