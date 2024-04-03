@@ -45,7 +45,7 @@ chrome.storage.sync.get("timeSec", (timeSec) => {
     chrome.storage.sync.get("usedTimeSec", (usedTimeSec) => {
         chrome.storage.sync.get("lastDay", (lastDay) => {
             if (lastDay.lastDay != new Date().getDate()) {
-                chrome.storage.sync.set({ usedTimeSec: 0, lastDay: new Date().getDate() })
+                chrome.storage.sync.set({ usedTimeSec: 0, lastDay: new Date().getDate(), extraTime: false })
                 return;
             }
             if (timeSec.timeSec == 0) {
@@ -57,4 +57,3 @@ chrome.storage.sync.get("timeSec", (timeSec) => {
         })
     })
 })
-

@@ -126,19 +126,25 @@ chrome.storage.sync.get("timeSec", (data) => {
     alert.textContent = "Time left: " + minutesLeft + " minutes";
     if (minutesLeft <= 0) {
       alert.className = alert.className + " alert-danger";
-      buttonAddMoreTime = document.createElement("button");
-      buttonAddMoreTime.id = "addMoreTime";
-      buttonAddMoreTime.className = "btn btn-primary";
-      buttonAddMoreTime.textContent = "Add 5 more minutes, please!";
-      buttonAddMoreTime.addEventListener("click", async () => {
-        chrome.storage.sync.get("usedTimeSec", (buttonUsedTimeSec) => {
-          const usedTimeSec = buttonUsedTimeSec.usedTimeSec - 300;
-          chrome.storage.sync.set({ usedTimeSec });
-          window.alert("Added 5 minutes more! Use them wisely!");
-          window.location.reload();
+      chrome.storage.sync.get("extraTime", (extraTime) => {
+        if (extraTime.extraTime) {
+          return;
+        }
+        buttonAddMoreTime = document.createElement("button");
+        buttonAddMoreTime.id = "addMoreTime";
+        buttonAddMoreTime.className = "btn btn-primary";
+        buttonAddMoreTime.textContent = "Add 5 more minutes, please!";
+        buttonAddMoreTime.addEventListener("click", async () => {
+          chrome.storage.sync.get("usedTimeSec", (buttonUsedTimeSec) => {
+            const usedTimeSec = buttonUsedTimeSec.usedTimeSec - 300;
+            chrome.storage.sync.set({ usedTimeSec });
+            chrome.storage.sync.set({ extraTime: true });
+            window.alert("Added 5 minutes more! Use them wisely!");
+            window.location.reload();
+          });
         });
+        alert.append(buttonAddMoreTime);
       });
-      alert.append(buttonAddMoreTime);
     } else if (minutesLeft < 10) {
       alert.className = alert.className + " alert-warning";
     } else {
